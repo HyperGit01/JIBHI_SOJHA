@@ -1,0 +1,911 @@
+/* =========================================
+   1. GLOBAL SETTINGS
+========================================= */
+
+:root {
+    --paper: #eee7d9;
+    --paper-light: #f8f3e9;
+    --paper-dark: #ded3c1;
+
+    --green: #344b3b;
+    --green-light: #657b63;
+
+    --brown: #705b47;
+    --brown-light: #9c876e;
+
+    --pink: #d9a7a3;
+
+    --ink: #39372f;
+
+    --white: #fffdf8;
+
+    --shadow: rgba(49, 44, 34, 0.13);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 30px;
+}
+
+body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.paper-texture {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.15;
+
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+}
+
+
+/* =========================================
+   2. OPENING COVER
+========================================= */
+
+.cover {
+    position: relative;
+    min-height: 100svh;
+
+    padding:
+        max(28px, env(safe-area-inset-top))
+        25px
+        max(25px, env(safe-area-inset-bottom));
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 45%,
+            #f8f2e7 0%,
+            #eee7d9 70%,
+            #e5dac8 100%
+        );
+}
+
+.cover-top,
+.cover-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: var(--brown-light);
+    font-size: 9px;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+.cover-top span:last-child {
+    font-size: 22px;
+    color: var(--pink);
+}
+
+.cover-content {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 35px 0;
+}
+
+.cover-stamp {
+    width: 90px;
+    height: 90px;
+
+    border: 1px solid var(--brown-light);
+    border-radius: 50%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: var(--green);
+
+    transform: rotate(-9deg);
+
+    margin-bottom: 35px;
+}
+
+.cover-stamp span {
+    font-size: 8px;
+    letter-spacing: 2px;
+}
+
+.cover-stamp strong {
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin: 3px 0;
+}
+
+.cover-eyebrow,
+.tiny-label {
+    color: var(--brown-light);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+}
+
+.cover h1 {
+    font-family: 'Playfair Display', serif;
+
+    font-size: clamp(65px, 17vw, 100px);
+    font-weight: 500;
+
+    line-height: 0.98;
+    letter-spacing: -4px;
+
+    color: var(--green);
+
+    margin: 22px 0;
+}
+
+.cover h1 span {
+    font-style: italic;
+    color: var(--pink);
+}
+
+.cover-subtitle {
+    font-family: 'Caveat', cursive;
+    font-size: 29px;
+    line-height: 1.1;
+
+    color: var(--brown);
+}
+
+.cover-dates {
+    border-top: 1px solid #cbbda9;
+    border-bottom: 1px solid #cbbda9;
+
+    padding: 11px 20px;
+    margin-top: 32px;
+
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--brown);
+}
+
+.open-diary {
+    background: var(--green);
+    color: var(--white);
+
+    border: none;
+    border-radius: 3px;
+
+    padding: 17px 27px;
+
+    margin-top: 38px;
+
+    font-size: 12px;
+    letter-spacing: 1px;
+
+    box-shadow: 0 6px 18px rgba(52, 75, 59, 0.18);
+
+    transition: transform 0.25s, background 0.25s;
+}
+
+.open-diary span {
+    margin-left: 15px;
+}
+
+.open-diary:active {
+    transform: scale(0.96);
+}
+
+.cover-decoration {
+    position: absolute;
+    color: var(--pink);
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.decoration-one {
+    font-size: 65px;
+    top: 22%;
+    left: 7%;
+    transform: rotate(-18deg);
+}
+
+.decoration-two {
+    font-size: 55px;
+    bottom: 20%;
+    right: 6%;
+}
+
+.decoration-three {
+    font-size: 30px;
+    top: 58%;
+    left: 8%;
+}
+
+
+/* =========================================
+   3. DIARY INTRODUCTION
+========================================= */
+
+.diary {
+    max-width: 750px;
+    width: 100%;
+    margin: auto;
+
+    padding: 35px 22px 0;
+}
+
+.diary-intro {
+    text-align: center;
+    padding: 60px 12px 45px;
+}
+
+.diary-intro h2,
+.final-section h2 {
+    font-family: 'Playfair Display', serif;
+
+    font-weight: 500;
+    font-size: 43px;
+
+    line-height: 1.15;
+    color: var(--green);
+
+    margin: 20px 0;
+}
+
+.diary-intro h2 em,
+.final-section h2 em {
+    color: var(--brown-light);
+    font-weight: 500;
+}
+
+.diary-intro > p {
+    max-width: 300px;
+    margin: auto;
+
+    color: var(--brown);
+    font-size: 12px;
+    line-height: 1.9;
+}
+
+.handwritten {
+    font-family: 'Caveat', cursive;
+}
+
+.intro-note {
+    color: var(--green-light);
+    font-size: 21px;
+    margin-top: 30px;
+    transform: rotate(-2deg);
+}
+
+
+/* =========================================
+   4. PROGRESS BAR
+========================================= */
+
+.journey-progress {
+    margin: 15px 0 55px;
+}
+
+.progress-heading {
+    display: flex;
+    justify-content: space-between;
+
+    color: var(--brown-light);
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+
+    margin-bottom: 10px;
+}
+
+.progress-track {
+    height: 3px;
+    background: #d7ccba;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    background: var(--green);
+
+    transition: width 0.2s linear;
+}
+
+
+/* =========================================
+   5. CHAPTERS
+========================================= */
+
+.chapter {
+    margin-bottom: 75px;
+}
+
+.chapter-heading {
+    position: relative;
+    margin-bottom: 35px;
+}
+
+.chapter-date {
+    color: var(--brown-light);
+    font-size: 9px;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+.chapter-heading h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+
+    font-size: 37px;
+    line-height: 1.15;
+
+    color: var(--green);
+    margin-top: 8px;
+}
+
+.chapter-heading p {
+    font-family: 'Caveat', cursive;
+    color: var(--brown-light);
+
+    font-size: 21px;
+    margin-top: 7px;
+}
+
+.chapter-number {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    font-family: 'Playfair Display', serif;
+    font-size: 46px;
+    font-style: italic;
+
+    color: rgba(112, 91, 71, 0.13);
+}
+
+
+/* =========================================
+   6. POLAROID GRID
+========================================= */
+
+.polaroid-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    column-gap: 17px;
+    row-gap: 34px;
+
+    align-items: start;
+}
+
+.polaroid-wrap {
+    min-width: 0;
+    perspective: 1100px;
+    position: relative;
+}
+
+.polaroid-wrap:nth-child(odd) {
+    transform: rotate(-2deg);
+}
+
+.polaroid-wrap:nth-child(even) {
+    transform: rotate(2.5deg);
+    margin-top: 24px;
+}
+
+.polaroid-wrap:nth-child(3n) {
+    transform: rotate(-3deg);
+}
+
+.polaroid {
+    position: relative;
+    display: block;
+
+    width: 100%;
+
+    background: transparent;
+    border: none;
+    padding: 0;
+
+    aspect-ratio: 0.76;
+
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(.2,.75,.25,1);
+
+    text-align: left;
+}
+
+.polaroid.flipped {
+    transform: rotateY(180deg);
+}
+
+.polaroid:focus-visible {
+    outline: 3px solid var(--green-light);
+    outline-offset: 5px;
+}
+
+.polaroid-face {
+    position: absolute;
+    inset: 0;
+
+    background: var(--white);
+
+    padding: 8px 8px 0;
+
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+
+    box-shadow:
+        0 5px 15px var(--shadow),
+        0 1px 3px rgba(0,0,0,0.05);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.polaroid-front {
+    z-index: 2;
+}
+
+.polaroid-image {
+    position: relative;
+
+    width: 100%;
+    aspect-ratio: 1 / 1.12;
+
+    background: #ded8cb;
+    overflow: hidden;
+}
+
+.polaroid-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+    object-fit: cover;
+
+    transition: transform 0.5s;
+}
+
+.polaroid:active .polaroid-image img {
+    transform: scale(1.025);
+}
+
+.polaroid-caption {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 4px;
+
+    padding: 8px 3px;
+}
+
+.polaroid-caption strong {
+    font-family: 'Caveat', cursive;
+
+    font-size: clamp(17px, 4.5vw, 23px);
+    font-weight: 600;
+
+    color: var(--ink);
+    text-align: center;
+
+    line-height: 1.05;
+}
+
+.polaroid-caption span {
+    font-size: 8px;
+    letter-spacing: 1px;
+
+    color: var(--brown-light);
+    text-align: center;
+}
+
+.tap-hint {
+    position: absolute;
+    bottom: 9px;
+    right: 9px;
+
+    background: rgba(255, 253, 248, 0.9);
+
+    color: var(--brown);
+
+    border-radius: 20px;
+
+    padding: 5px 8px;
+
+    font-size: 8px;
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================================
+   7. POLAROID BACK
+========================================= */
+
+.polaroid-back {
+    transform: rotateY(180deg);
+
+    background:
+        linear-gradient(
+            140deg,
+            #f7f0e4,
+            #eee3d2
+        );
+
+    padding: 15px 12px;
+
+    justify-content: space-between;
+
+    border: 1px solid #e2d7c5;
+}
+
+.back-top {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    color: var(--brown-light);
+    text-align: center;
+}
+
+.back-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    gap: 12px;
+}
+
+.back-content h3 {
+    font-family: 'Playfair Display', serif;
+
+    font-size: clamp(16px, 4.5vw, 22px);
+    font-weight: 500;
+
+    color: var(--green);
+    text-align: center;
+    line-height: 1.2;
+}
+
+.back-content p {
+    font-family: 'Caveat', cursive;
+
+    font-size: clamp(15px, 4vw, 20px);
+    line-height: 1.25;
+
+    color: var(--brown);
+    text-align: center;
+
+    overflow-wrap: anywhere;
+}
+
+.back-footer {
+    font-family: 'Caveat', cursive;
+    font-size: 17px;
+
+    color: var(--pink);
+    text-align: center;
+}
+
+
+/* =========================================
+   8. TEXT-ONLY SCRAPBOOK NOTES
+========================================= */
+
+.memory-note {
+    grid-column: 1 / -1;
+
+    position: relative;
+
+    padding: 17px 18px 17px 22px;
+
+    margin: 4px 5px 8px;
+
+    background: rgba(255, 253, 248, 0.48);
+
+    border-left: 2px solid var(--pink);
+
+    transform: rotate(-0.5deg);
+}
+
+.memory-note::after {
+    content: "✳";
+
+    position: absolute;
+    right: 14px;
+    top: 9px;
+
+    color: var(--pink);
+    opacity: 0.7;
+}
+
+.memory-note span {
+    display: block;
+
+    font-size: 8px;
+    letter-spacing: 1.5px;
+
+    color: var(--brown-light);
+    margin-bottom: 7px;
+}
+
+.memory-note p {
+    font-family: 'Caveat', cursive;
+    font-size: 21px;
+    color: var(--brown);
+
+    line-height: 1.25;
+
+    padding-right: 20px;
+}
+
+
+/* =========================================
+   9. FINAL LETTER SECTION
+========================================= */
+
+.final-section {
+    position: relative;
+
+    text-align: center;
+
+    padding: 65px 8px 70px;
+
+    border-top: 1px solid #d8cbb8;
+    border-bottom: 1px solid #d8cbb8;
+
+    margin-top: 35px;
+}
+
+.letter-decoration {
+    font-size: 32px;
+    color: var(--pink);
+
+    margin-bottom: 22px;
+}
+
+.final-description {
+    max-width: 290px;
+    margin: 0 auto;
+
+    color: var(--brown);
+
+    font-size: 12px;
+    line-height: 1.9;
+}
+
+.letter-button {
+    border: 1px solid var(--green);
+    background: transparent;
+
+    color: var(--green);
+
+    padding: 14px 22px;
+
+    font-size: 11px;
+    letter-spacing: 0.5px;
+
+    margin-top: 30px;
+
+    transition: background 0.3s, color 0.3s;
+}
+
+.letter-button:active {
+    background: var(--green);
+    color: white;
+}
+
+.letter-content {
+    margin-top: 30px;
+    animation: letterAppear 0.7s ease;
+}
+
+@keyframes letterAppear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.letter-paper {
+    text-align: left;
+
+    background: #f8f0e3;
+
+    padding: 28px 22px;
+
+    box-shadow: 0 7px 25px var(--shadow);
+
+    transform: rotate(-0.5deg);
+
+    border: 1px solid #e4d7c3;
+}
+
+.letter-top {
+    font-size: 8px;
+    letter-spacing: 2px;
+
+    color: var(--brown-light);
+
+    text-align: center;
+    margin-bottom: 27px;
+}
+
+.letter-paper h3 {
+    font-family: 'Caveat', cursive;
+
+    font-size: 26px;
+    font-weight: 500;
+
+    color: var(--green);
+
+    margin-bottom: 20px;
+}
+
+.letter-paper p {
+    font-family: 'Caveat', cursive;
+
+    font-size: 20px;
+    line-height: 1.45;
+
+    color: var(--brown);
+
+    margin-bottom: 16px;
+}
+
+.letter-paper .letter-signature {
+    color: var(--green);
+    font-size: 24px;
+
+    text-align: right;
+    margin-top: 25px;
+}
+
+.final-heart {
+    font-size: 22px;
+    color: var(--pink);
+
+    margin-top: 45px;
+}
+
+
+/* =========================================
+   10. FOOTER
+========================================= */
+
+.diary-footer {
+    text-align: center;
+    padding: 35px 0 45px;
+}
+
+.diary-footer p {
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: var(--brown-light);
+}
+
+.diary-footer span {
+    display: block;
+
+    font-family: 'Caveat', cursive;
+    font-size: 21px;
+
+    color: var(--green);
+    margin-top: 10px;
+}
+
+.diary-footer button {
+    border: none;
+    background: transparent;
+
+    color: var(--brown-light);
+
+    font-size: 10px;
+    margin-top: 25px;
+
+    padding: 10px;
+}
+
+
+/* =========================================
+   11. DESKTOP RESPONSIVENESS
+========================================= */
+
+@media (min-width: 650px) {
+
+    .cover {
+        min-height: 850px;
+    }
+
+    .diary {
+        padding-left: 45px;
+        padding-right: 45px;
+    }
+
+    .diary-intro h2 {
+        font-size: 55px;
+    }
+
+    .polaroid-grid {
+        column-gap: 40px;
+        row-gap: 45px;
+        padding: 0 30px;
+    }
+
+    .polaroid-wrap:nth-child(even) {
+        margin-top: 45px;
+    }
+
+    .polaroid-face {
+        padding: 13px 13px 0;
+    }
+
+    .polaroid-back {
+        padding: 25px 20px;
+    }
+
+    .back-content p {
+        font-size: 24px;
+    }
+
+    .letter-paper {
+        padding: 40px;
+    }
+}
+
+
+/* =========================================
+   12. ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+
+}
