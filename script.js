@@ -68,7 +68,7 @@ const chapters = [
                 title: "Our little stay",
                 date: "29 OCTOBER",
                 storyTitle: "Finally, Jibhi!",
-                message: "After all that travelling, we finally reached our stay. A new place, a new day and four days of adventure waiting for us.",
+                message: "After all that travelling, we finally reached our stay. A new place, a new day and four days of adventure waiting for us. Thanks for the stay btw",
                 alt: "Our stay in Jibhi",
                 rotation: -3
             },
@@ -79,7 +79,7 @@ const chapters = [
                 title: "By the riverside",
                 date: "29 OCTOBER",
                 storyTitle: "Little river moments",
-                message: "Playing by the riverside, enjoying the sound of the water and forgetting about everything else for a little while.",
+                message: "Playing by the riverside, enjoying the sound of the water and forgetting about everything else for a little while. but please dont jump again without prior notice",
                 alt: "The riverside near our stay",
                 rotation: 3
             },
@@ -98,7 +98,7 @@ const chapters = [
             {
                 type: "note",
                 time: "29 OCTOBER · NIGHT",
-                text: "And then came the bonfire. The kind of evening that makes you wish the night would last just a little longer."
+                text: "And then came the bonfire. The kind of evening that makes you wish the night would last just a little longer. and finally we are married..."
             }
 
         ]
@@ -116,7 +116,7 @@ const chapters = [
             {
                 type: "note",
                 time: "30 OCTOBER · MORNING",
-                text: "Starting the day with Mini Thailand. One more beautiful place added to our little adventure."
+                text: "Starting the day with Mini Thailand. One more beautiful place added to our little adventure. Har jagah gussa"
             },
 
             {
@@ -142,7 +142,7 @@ const chapters = [
                 title: "Chasing sunsets",
                 date: "30 OCTOBER",
                 storyTitle: "A sky to remember",
-                message: "Some views are difficult to describe. You just stand there, look around and wish you could save that exact moment forever.",
+                message: "Some views are difficult to describe. You just stand there, look around and wish you could save that exact moment forever. for me, it's your beautiful face",
                 alt: "Sunset at Raghupur Fort",
                 rotation: -3
             },
@@ -150,7 +150,7 @@ const chapters = [
             {
                 type: "note",
                 time: "30 OCTOBER · NIGHT",
-                text: "Camping at Raghupur Fort. A night away from the city, surrounded by mountains, with a sky full of stories."
+                text: "Camping at Raghupur Fort. A night away from the city, surrounded by mountains, with a sky full of stories. and hanuman chalisa"
             }
 
         ]
@@ -199,7 +199,7 @@ const chapters = [
                 title: "A little peace",
                 date: "31 OCTOBER",
                 storyTitle: "A moment at the mandir",
-                message: "A little stop at the mandir during our last day in the mountains. A quiet moment in the middle of our journey.",
+                message: "You may never know what I wished for but we are returning again their in a few years because my wish will be fulfilled.",
                 alt: "Mandir at Raghupur Fort",
                 rotation: -3
             },
